@@ -19,4 +19,4 @@ $("#nombre").keyup(function () {
 $("h1").on("mouseleave click",function(){
     alert("Aplicando dos eventos al titulo");
 });
-$("h1").off("click");
+$("h1").off("mouseleave");
