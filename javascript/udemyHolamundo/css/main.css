@@ -1,0 +1,17 @@
+/* body {
+    background-color: #eeeeee;
+    color:#ff0000;
+} */
+body{
+    background: #efefef;
+}
+/* #parrafo{
+    color:#ff0000;
+}
+.etiqueta{
+    color: green;
+} */
+.caja{
+    margin:8px;
+    background-color: #aaf;
+}
