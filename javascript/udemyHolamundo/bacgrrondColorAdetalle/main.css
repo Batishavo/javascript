@@ -2,10 +2,23 @@ body {
   background-color: #eee;
 }
 
-.fondo{
+/* .fondo{
   height:400px;
-  background-color: green;
+  background: green url('http://placekitten.com/200/300')
+    no-repeat left top fixed 
+  ;
+  background-size: cover;
+  /* background-color: green;
   background-image: url('http://placekitten.com/200/300');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: left top;
+  background-attachment: scroll;
+  background-size: cover; */
+/*}*/ 
+/* .fondo{
+  background-color: hsl(125,60%,70%,0.9);
+  opacity: 1;
+} */
+.fondo{
+  background-image: repeating-linear-gradient(0deg,rgba(255,0,0,1),tomato, 10%,tomato 20%);
 }
