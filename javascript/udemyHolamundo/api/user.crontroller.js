@@ -1,18 +1,35 @@
+const Users = require('./User')
 const User = {
-    get:(req, res)=>{
-        res.status(200).send("este es un chanchito")
+    get:async(req, res)=>{
+        const {id} = req.params
+        const user = await Users.findOne({_id: id})
+        res.status(200).send(user)
     },
-    list: (req,res)=>{
-        res.status(200).send('Hola chanchito')
+    list: async (req,res)=>{
+        const users = await Users.find()
+        res.status(200).send(users)
+        console.log(users)
     },
-    create: (req,res)=>{
-        res.status(201).send("Creando un chanchito")
+    create: async (req,res)=>{
+        console.log(req.body)
+        const user = new Users(req.body)
+        const savedUser = await user.save()
+        res.status(201).send(savedUser.id)
     },
-    update:(req,res)=>{
+    update:async (req,res)=>{
+        const {id} = req.params
+        const user = await Users.findOne({_id: id})
+        Object.assign(user, req.body)
+        await user.save()
         res.status(204).send('actualizando chanchito')
     },
-    delete:(req,res)=>{
-        res.status(204).send('eliminando chanchito :(')
+    delete:async (req,res)=>{
+        const {id} = req.params
+        const user = await Users.findOne({_id: id})
+        if(user){
+            user.remove()
+        }
+        res.sendStatus(204)
     }
 }
 

@@ -1,9 +1,12 @@
-const { application } = require('express');
-const user = require("./user.crontroller")
 const express = require('express');
-
+const mongoose = require("mongoose")
+const user = require("./user.crontroller")
 const app = express();
 const port = 3000;
+
+app.use(express.json());
+
+mongoose.connect('mongodb+srv://litos:CISCO@cluster0.wn6vz82.mongodb.net/miBaseDeDatos?retryWrites=true&w=majority')
 
 app.get("/",user.list)
 app.post("/",user.create)
