@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const Animal = require("./animal.controller");
+const {Auth, isAuthenticated} = require('./aut.controller')
 const port = 3000;
 
 mongoose.connect(
@@ -10,12 +11,14 @@ mongoose.connect(
 
 app.use(express.json());
 
-app.get("/animals", Animal.list);
-app.post("/animals", Animal.create);
-app.put("/animals/:id", Animal.update);
-app.patch("/animals/:id", Animal.update);
-app.delete("/animals/:id", Animal.destroy);
+app.get("/animals",isAuthenticated, Animal.list);
+app.post("/animals",isAuthenticated, Animal.create);
+app.put("/animals/:id",isAuthenticated, Animal.update);
+app.patch("/animals/:id", isAuthenticated,Animal.update);
+app.delete("/animals/:id",isAuthenticated, Animal.destroy);
 
+app.post("/login", Auth.login);
+app.post("/registe", Auth.register);
 app.use(express.static("app"));
 
 app.get("/", (req, res) => {
