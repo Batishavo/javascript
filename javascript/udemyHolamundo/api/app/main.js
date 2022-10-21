@@ -5,11 +5,11 @@ const loadInitialTemplate = () =>{
         <h1>Usuarios</h1>
         <form id="user-form">
             <div>
-                <label>username</label>
+                <label>name</label>
                 <input  name= "name" />
             </div>
             <div>
-                <label>edad</label>
+                <label>lastname</label>
                 <input name = "lastname" />
             </div>
             <button type = "submit">Enviar</button>
@@ -26,11 +26,21 @@ const getUsers = async () =>{
      console.log(users)
     const template =  user => `
         <li>
-            ${user.username} ${user.edad} <button data-id="${user._id}">Eliminar</button>
+            ${user.name} ${user.lastname} <button data-id="${user._id}">Eliminar</button>
         </li>
     `
     const userList = document.getElementById("user-list")
     userList.innerHTML = users.map(user => template(user)).join('')
+    users.forEach(user =>{
+        const userNode = document.querySelector(`[data-id="${user._id}"]`)
+        userNode.onclick = async e =>{
+            await fetch(`/users/${user._id}`,{
+                method: 'DELETE'
+            })
+            userNode.parentNode.remove()
+            alert("Eliminado con éxito")
+        }
+    })
 }
 
 const addFormListener = () =>{

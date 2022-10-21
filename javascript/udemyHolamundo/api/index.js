@@ -50,4 +50,4 @@ const eliminar = async () =>{
     }
 }
 
-eliminar();
+//eliminar();
