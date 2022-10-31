@@ -3,7 +3,7 @@ const loadInitialTemplate = () => {
 		<h1>Animales</h1>
 		<form id="animal-form">
 			<div>
-				<label>Nombre</label>
+				<label> Nombre </label>
 				<input name="name" />
 			</div>
 			<div>
@@ -19,7 +19,12 @@ const loadInitialTemplate = () => {
 };
 
 const getAnimals = async () => {
-  const response = await fetch("/animals");
+  const response = await fetch("/animals",{
+    headers: {
+      Authorization: localStorage.getItem("jwt")
+    }
+  });
+
   const animals = await response.json();
   const template = (animal) => `
 		<li>
@@ -52,6 +57,7 @@ const addFormListener = () => {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
+        Authorization: localStorage.getItem('jwt')
       },
     });
     animalForm.reset();
@@ -62,13 +68,74 @@ const addFormListener = () => {
 const checkLogin = () => {
   localStorage.getItem("jwt");
 };
-const animalsPage =() =>{
-	loadInitialTemplate();
-	addFormListener();
-	getAnimals();
-}
-const loadLoginTemplate = () =>{
-	const template = `
+const animalsPage = () => {
+  loadInitialTemplate();
+  addFormListener();
+  getAnimals();
+};
+
+const loadRegisterTemplate = () => {
+  const template = `
+		<h1>Register</h1>
+		<form id="register-form">
+			<div>
+				<label>Correo</label>
+				<input name="email" />
+			</div>
+			<div>
+				<label>Contraseña</label>
+				<input  name="password" />
+			</div>
+			<button type="submit">Enviar</button>
+		</form>
+		<a href="#" id= "login">Inicar secion</a>
+		<div id="error"></div>
+	`;
+
+  const body = document.getElementsByTagName("body")[0];
+  body.innerHTML = template;
+};
+const addRegisterListener = () => {
+  const registerForm = document.getElementById("register-form");
+  registerForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(registerForm);
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await fetch("/register", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseData = await response.text();
+    if (response.status >= 300) {
+      const errorNode = document.getElementById("error");
+      errorNode.innerHTML = responseData;
+    } else {
+      localStorage.setItem('jwt',`Bearer ${responseData}`)
+      console.log(responseData);
+      animalsPage()
+      
+    }
+  };
+};
+const gotoLoginLIstener = () => {};
+
+const registerPage = () => {
+  // console.log("Pagina de registro");
+  loadRegisterTemplate();
+  addRegisterListener();
+  gotoLoginLIstener();
+};
+const loginPage = () => {
+  loadLoginTemplate();
+  addLoginListener();
+  gotoRegisterListener();
+};
+const loadLoginTemplate = () => {
+  const template = `
 		<h1>Login</h1>
 		<form id="login-form">
 			<div>
@@ -81,18 +148,49 @@ const loadLoginTemplate = () =>{
 			</div>
 			<button type="submit">Enviar</button>
 		</form>
+		<a href="#" id= "register">Registrarse</a>
 		<div id="error"></div>
 	`;
 
-	const body = document.getElementsByTagName('body')[0]
-	body.innerHTML = template;
-}
+  const body = document.getElementsByTagName("body")[0];
+  body.innerHTML = template;
+};
+const gotoRegisterListener = () => {
+  const gotoRegister = document.getElementById("register");
+  gotoRegister.onclick = (e) => {
+    e.preventDefault();
+    registerPage();
+  };
+};
+const addLoginListener = () => {
+  const loginForm = document.getElementById("login-form");
+  loginForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await fetch("/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseData = await response.text();
+    if (response.status >= 300) {
+      const errorNode = document.getElementById("error");
+      errorNode.innerHTML = responseData;
+    } else {
+      console.log(responseData);
+    }
+  };
+};
+
 window.onload = () => {
   const isLoggedIn = checkLogin();
-  if(isLoggedIn){
-	animalsPage()
-  }else{
-	loadLoginTemplate();
+  if (isLoggedIn) {
+    animalsPage();
+  } else {
+    loginPage();
   }
- 
 };

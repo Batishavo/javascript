@@ -18,7 +18,7 @@ app.patch("/animals/:id", isAuthenticated,Animal.update);
 app.delete("/animals/:id",isAuthenticated, Animal.destroy);
 
 app.post("/login", Auth.login);
-app.post("/registe", Auth.register);
+app.post("/register", Auth.register);
 app.use(express.static("app"));
 
 app.get("/", (req, res) => {
