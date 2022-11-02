@@ -28,5 +28,25 @@ app.get("/", (req, res) => {
   // //       console.error(error);
   // //     });
 });
+app.post("/send",async (req, res) => {
+  const { to, subject, html } = req.body;
+  const msg = {
+    to,
+    from: process.env.FROM,
+    subject,
+    html,
+  }
+
+  try {
+    await sgMail.send(msg)
+    res.sendStatus(204)
+  }
+  catch (e){
+    const message = e.response.body.errors.map(e=>e.message).join(' ')
+    //console.log(e.response.body.errors)
+    res.status(400).send(message)
+  }
+
+});
 
 app.listen(3000, () => console.log("la app está correindo!"));
