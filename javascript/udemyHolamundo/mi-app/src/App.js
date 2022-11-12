@@ -1,35 +1,41 @@
 //import Button from "./Button"
-import {Component} from "react"
+import {Component} from "react";
 
 class Button extends Component {
-  render(){
-    console.log('ejecutando metodo render de button');
+  state = {valor:''};
+  constructor(props) {
+    super(props);
+    console.log("contructor", props);
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("component did update", prevProps, prevState);
+  }
+
+  componentWillUnmount() {
+    console.log("desmontando comoponente", this.props, this.state);
+  }
+
+  render() {
+    console.log("ejecutando metodo render de button");
     return (
-      <button>
-        Enviar en app
-      </button>
-    )
+      <button onClick={() => this.setState({prop: 1})}>Enviar en app</button>
+    );
   }
 }
 
 class App extends Component {
-  state= {
-    valor:3
-  }
-  render(){
-    console.log(this.state)
+  render() {
+    console.log(this.state);
     return (
-      <div>
-        <p>Hola mundo</p>
-        <Button/>
-        <button 
-          className={`${this.state.valor}`}
-          onClick={()=>this.setState({valor:2})}
-          >
-          Enviar
-        </button>
-      </div>
-    )
+      <p>
+        Nombe
+      </p>
+    );
   }
 }
 
@@ -55,4 +61,4 @@ class App extends Component {
 //   )
 // }
 
-export default App
+export default App;
