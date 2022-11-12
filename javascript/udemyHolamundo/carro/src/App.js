@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {Component} from 'react'
+import Productos from './components/Productos'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    productos:[
+      {name:'Xbox720',price: 1500,img:'/assets/xbox720.png'},
+      {name:'ninteno playstation',price: 1500,img:'/assets/nintendo.jpg'},
+      {name:'ps5',price: 1500,img:'/assets/ps5.png'},
+    ]
+  }
+  render(){
+    return (
+      <div>
+        <Productos 
+          agregarAlCarro={()=>console.log('No hace nada')}
+          productos={this.state.productos}
+        />
+        {/* <p>Hola mundo</p> */}
+      </div>
+    )
+  }
 }
 
 export default App;
