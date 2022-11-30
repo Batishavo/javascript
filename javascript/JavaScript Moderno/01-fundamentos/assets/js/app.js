@@ -1,3 +1,6 @@
+
+let miNuevoNombre ="litos";
+console.log(miNuevoNombre);
 // console.log('Hola munod0');
 
 // alert('Hola desde app.js');
@@ -16,4 +19,3 @@ const saludo = c + d;
 // console.log({c});
 // c='Hola de nuevo';
 // console.table({a, b, x, d, x});
-var miNombre = 'Fernando'
