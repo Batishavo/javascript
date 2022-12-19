@@ -1,13 +1,3 @@
-/*
-    Orden de las clases
-    propiedades
-    metodos estaticos
-    propiedades de la clase
-    gets y sets
-    metodos
-    (privado puede ir al final)
-*/ 
-
 class Persona{
 
     static _conteo = 0;
@@ -49,20 +39,20 @@ class Persona{
 
 }
 
-const spiderman = new Persona('Peter parker','spiderman','soy tu amigable vecino spiderman' );
-const ironman = new Persona('Tony Stark','Ironman','yo soy Ironman' );
-// console.log(ironman);
+class Heroe extends Persona  {
+    
+    clan ="sin clan";
+    constructor(nombre, codigo,frase){
+        super(nombre, codigo,frase);
+        this.clan = 'The avengers';
+    }
+    quienSoy(){
+        console.log(`Soy ${this.nombre}, ${this.clan}`);
+        super.quienSoy();
+    }
+}
 
-//spiderman.quienSoy();
-//ironman.miFrase();
-// spiderman.setComidadFavorita = 'El pie de cereza de la tia May';
-// spiderman.nemesis = 'Green gobling';
-
-// console.log(spiderman.getComidadFavorita)
-// console.log(spiderman);
-// Persona._conteo=2
-console.log('Conteo stático', Persona._conteo);
-console.log(Persona._conteo);
-Persona.mensaje();
-Persona.propiedadExterna = 'Hola mundo';
-console.log(Persona);
+const spiderman = new Heroe('Peter parker','spiderman','soy tu amigable vecino spiderman' );
+// const ironman = new Persona('Tony Stark','Ironman','yo soy Ironman' );
+console.log(spiderman);
+spiderman.quienSoy()
