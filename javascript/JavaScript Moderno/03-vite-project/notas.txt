@@ -1,0 +1,7 @@
+las dev dependencis son solo necesarias para conturir la aplicación
+una vez ya countruido solo usa las de producion.
+
+Comandos
+$npm run dev
+$npm create vite
+$npm install
