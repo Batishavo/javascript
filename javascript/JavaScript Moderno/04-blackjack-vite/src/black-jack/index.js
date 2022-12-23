@@ -1,6 +1,9 @@
 import _ from "underscore";
 // import {crearDeck as nuevoDeck}  from './usecases/crear-deck'
-import nuevoDeck  from './usecases/crear-deck'
+// import nuevoDeck  from './usecases/crear-deck'
+// import  {pedirCarta} from './usecases/pedir-carta'
+// import {valorCarta} from './usecases/valor-carta'
+import{crearDeck as nuevoDeck,pedirCarta,valorCarta} from './usecases'
 /**
  * 2C = twof clubs
  * 2D = twof Diaminds
@@ -11,7 +14,7 @@ import nuevoDeck  from './usecases/crear-deck'
 const miModulo = (() => {
   "use strict";
   //Cosntantes de creacion
-  const tipos = ["C", "D", "H", "S"],
+  const tipos  = ["C", "D", "H", "S"],
     especiales = ["A", "J", "Q", "K"],
     //Referencias del HTML
     btnPedir = document.querySelector("#btnPedir"),
@@ -41,20 +44,6 @@ const miModulo = (() => {
 
   };
 
-  
-  //Esta funcion me permite tomar una carta
-  const pedirCarta = () => {
-    if (deck.length === 0) {
-      throw "No hay cartas el el deck";
-    }
-    return deck.pop();
-  };
-
-  //Pedir carts
-  const valorCarta = carta => {
-    const valor = carta.substring(0, carta.length - 1);
-    return !isNaN(valor) ? valor * 1 : valor === "A" ? 10 : 11;
-  };
   //Turno:0 = primer jugador y el último será la computadora
   const acumularPuntos = (carta, turno) => {
     puntosJugadores[turno] += valorCarta(carta);
@@ -85,7 +74,7 @@ const miModulo = (() => {
   const turnoComputadora = puntosMinimos => {
     let puntosComputadora = 0;
     do {
-      const carta = pedirCarta();
+      const carta = pedirCarta(deck);
       puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
       crearCarta(carta, puntosJugadores.length - 1);
       if (puntosMinimos > 21) {
@@ -97,7 +86,7 @@ const miModulo = (() => {
 
   //Eventos
   btnPedir.addEventListener("click", () => {
-    const carta = pedirCarta();
+    const carta = pedirCarta(deck);
     const puntosJugador = acumularPuntos(carta, 0);
     //Agregar carta
     crearCarta(carta, 0);
