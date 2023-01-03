@@ -1,0 +1,26 @@
+/* body {
+    background-color: #eeeeee;
+    color:#ff0000;
+} */
+body{
+    background: #efefef;
+}
+/* #parrafo{
+    color:#ff0000;
+}
+.etiqueta{
+    color: green;
+} */
+.caja{
+    margin:8px;
+    padding: 8px; 
+    border-style: dotted dashed solid double;
+    border-width: 8px;
+    border-color: #faa;
+    border-left: 6px solid #afa;
+    background-color: #aaf;
+    border-radius:10px;
+    width: 100px;
+    height: 100px;
+    color:#220;
+}

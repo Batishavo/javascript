@@ -1,0 +1,19 @@
+body{
+   background-color: #eee; 
+}
+p{
+    font-family: "Times New Roman";
+    font-style: oblique;
+    font-size: 1.5em;
+    color:green;
+    text-align: justify;
+    text-indent: 40px;
+    line-height: 1.4;
+    word-spacing: 10px;
+    text-shadow: 1px 1px 5px black;
+}
+a{
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 3px;
+}
