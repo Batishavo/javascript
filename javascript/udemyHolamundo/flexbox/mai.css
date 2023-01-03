@@ -1,0 +1,27 @@
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  height: 200px;
+  /* justify-content: space-evenly; */
+  /* align-items: stretch; */
+  /* flex-wrap: wrap-reverse; */
+  /* flex-direction: column-reverse; */
+  /* align-content: space-evenly; */
+}
+.primero {
+  flex: 1 120px;
+}
+.segundo {
+  flex-grow: 1;
+}
+.tercero {
+  flex-grow: 2;
+  align-self: stretch;
+}
+
+/* .segundo{
+    order:-1;
+} */
+.red {
+  background-color: red;
+}

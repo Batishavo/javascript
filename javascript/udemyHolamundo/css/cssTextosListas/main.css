@@ -1,0 +1,16 @@
+body{
+   background-color: #eee; 
+}
+ul {
+    /* list-style-type: lower-alpha; */
+    background-color: #fff;
+    border:solid 1px #ddd;
+    border-radius: rpx;
+    padding: 15px;
+    list-style-type: none;
+    padding-left: 0px;
+}
+li{
+    border-bottom: solid 1px #ddd;
+    padding: 15px;
+}
