@@ -21,3 +21,4 @@ export const renderTodos = (elementId, todos = []) => {
     element.append(createTodoHtml(todo));
   });
 };
+

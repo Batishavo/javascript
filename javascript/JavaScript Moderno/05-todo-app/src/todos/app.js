@@ -5,6 +5,7 @@ import {renderTodos} from "./uses-cases";
 const ElementIds = {
   TodosList: ".todo-list",
   NewTodoInput: "#new-todo-input",
+  Destroy: "destroy",
 };
 
 /**
@@ -28,15 +29,34 @@ export const App = elementId => {
   })();
   //Referencias HTML
   const newDescriptionInput = document.querySelector(ElementIds.NewTodoInput);
-  //console.log(newDescriptionInput);
+  const todoListUl = document.querySelector(ElementIds.TodosList);
+  // const todoListU2 = document.querySelector(ElementIds.Destroy);
   ///Listeners
-  //console.log(ElementIds.NewTodoInput);
   newDescriptionInput.addEventListener("keyup", event => {
     if (event.keyCode !== 13) return;
     if (event.target.value.trim().length === 0) return;
 
     todoStore.addTodo(event.target.value);
-    displayTodos(); 
+    displayTodos();
     event.target.value = "";
+  });
+
+  todoListUl.addEventListener("click", event => {
+    const element = event.target.closest("[data-id]");
+    todoStore.toggleTodo(element.getAttribute("data-id"));
+    displayTodos();
+  });
+  todoListUl.addEventListener("click", event => {
+    const element = event.target.closest("[class]"),
+      elementId = event.target.closest("[data-id]");
+    //console.log(element.getAttribute("class"));
+    if (element.getAttribute("class") == ElementIds.Destroy) {
+      todoStore.deleteTodo(elementId.getAttribute("data-id"));
+      displayTodos();
+      //console.log("entro")
+    }
+    // const element = event.target.closest("[data-id]");
+    //console.log(element);
+    //
   });
 };
