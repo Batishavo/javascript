@@ -3,6 +3,7 @@ import { callbacksComponent } from './src/concepts/02-callbacks'
 import { promiseComponet } from './src/concepts/03-promices'
 import {evironmetsComponet} from './src/concepts/01-enviroments'
 import javascriptLogo from './javascript.svg'
+import { promiseRaceComponet } from './src/concepts/04-promise-race'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -22,4 +23,5 @@ document.querySelector('#app').innerHTML = `
 const element = document.querySelector('.card')
 // evironmetsComponet(element);
 // callbacksComponent(element);
-promiseComponet(element); 
+// promiseComponet(element); 
+promiseRaceComponet(element); 
