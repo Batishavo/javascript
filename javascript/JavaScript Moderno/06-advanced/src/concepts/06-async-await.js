@@ -1,33 +1,30 @@
-import { heroes } from '../data/heroes'
+import {heroes} from "../data/heroes";
+
 /**
- * 
- * @param {HTMLDivElement} element 
+ *
+ * @param {HTMLDivElementa} element
  */
-export const asyncAwaitComponent = async( element ) => {
+export const asyncAwaitComponet = async element => {
+  // console.log(' asyncAwaitcomponent')
+  const id1 = "5d86371fd55e2e2a30fe1ccb";
+  const id2 = "5d86371fd55e2e2a30fe1ccb1";
 
-    const id1 = '5d86371f2343e37870b91ef13';
-    const id2 = '5d86371f25a058e5b1c8a65e';
+  
+  try{
+    const {name: name1} = await findHero(id1);
+    const {name: name2} = await findHero(id2);
+    element.innerHTML = `${name1} / ${name2}`;
+  }catch(error){
+    element.innerHTML=error;
 
-    try {
-        const hero1 = await findHero( id1 );
-        const hero2 = await findHero( id2 );
-    
-        element.innerHTML = `${ hero1.name } / ${ hero2.name }`;
-        
-    } catch (error) {
-        element.innerHTML = error;
-    }
+  }
+  
+};
 
-
-}
-
-
-const findHero = async( id ) => {
-
-    const hero = heroes.find( hero => hero.id === id );
-    if ( !hero )
-        throw `Hero not found`;
-
-    return hero;
-
-}
+const findHero = async id => {
+  const heroe = heroes.find(hero => hero.id === id);
+  if (!heroe) {
+    throw `Hero not found`;
+  }
+  return heroe;
+};
