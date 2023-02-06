@@ -1,44 +1,48 @@
-import { loadUsersByPage } from "../uses-cases/load-users-by-page";
-const state={
-    currentPage:0,
-    users:[],
-}
+import {loadUsersByPage} from "../uses-cases/load-users-by-page";
+const state = {
+  currentPage: 0,
+  users: [],
+};
 
-const loadNextPage = async()=>{
-   const users = await loadUsersByPage(state.currentPage + 1);
-   if(users.length === 0) return;
+const loadNextPage = async () => {
+  const users = await loadUsersByPage(state.currentPage + 1);
+  if (users.length === 0) return;
 
-   state.currentPage +=1;
-   state.users = users;
-}
+  state.currentPage += 1;
+  state.users = users;
+};
 
-const loadPreviousPage = async()=>{
-    throw new Error('No implementado');
-}
+const loadPreviousPage = async () => {
+    const users = await loadUsersByPage(state.currentPage - 1);
+    if (users.length === 0 || state.currentPage - 1<=0) return;
+  
+    state.currentPage -= 1;
+    state.users = users;
+};
 
 //TODO: implementar
-const onUserChanged=()=>{
-    throw new Error('No implementado');
-}
+const onUserChanged = () => {
+  throw new Error("No implementado");
+};
 
-const reloadPage=async()=>{
-    throw new Error('No implementado');
-}
+const reloadPage = async () => {
+  throw new Error("No implementado");
+};
 
 export default {
-    loadNextPage,
-    loadPreviousPage,
-    onUserChanged,
-    reloadPage,
+  loadNextPage,
+  loadPreviousPage,
+  onUserChanged,
+  reloadPage,
 
-    /**
-     * 
-     * @returns {User []}
-     */
-    getUsers: () => [...state.users],
-    /**
-     * 
-     * @returns [NUmbre]
-     */
-    getCurrentPage: () => state.currentPage,
-}
+  /**
+   *
+   * @returns {User []}
+   */
+  getUsers: () => [...state.users],
+  /**
+   *
+   * @returns [NUmbre]
+   */
+  getCurrentPage: () => state.currentPage,
+};
